@@ -16,15 +16,22 @@ As a side effect, poisons object collection and causes `print(b'xyz')` to print 
 [flow_control.py](flow_control.py)
 ----------------------------------
 
-*Destroy your python code with foreign language extensions!*
+*Patching opcodes during runtime!*
 
 ```python
-from flow_control import _return
+from flow_control import return_, permajump
 
 def f():
-    _return("hacked")
+    return_("hacked")
     return 42
 
+print(f())  # prints 'hacked'
+
+def g():
+    x = "hacked"
+    permajump(8, "current")
+    x = 42
+    return x
 print(f())  # prints 'hacked'
 ```
 

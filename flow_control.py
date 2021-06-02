@@ -75,7 +75,7 @@ def permajump(where, anchor="head"):
 
 if __name__ == "__main__":
     def a():
-        return_("h" + "acked123"[:-3])
+        return2("h" + "acked123"[:-3])
         return 2
     assert a() == "hacked"
 
