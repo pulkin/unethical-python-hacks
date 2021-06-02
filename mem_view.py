@@ -5,6 +5,10 @@ def ptr(data):
     return id(data) + 0x20
 
 
+def _p_hex(x):
+    return '\n'.join(f"+{offset:04x}: {' '.join(f'{i:02x}' for i in x[offset:offset + 16])}" for offset in range(0, len(x), 16))
+
+
 class Mem:
     def __init__(self, addr, length):
         self.addr = addr
@@ -40,8 +44,11 @@ class Mem:
     def __len__(self):
         return self.length
 
-    def __str__(self):
+    def __repr__(self):
         return f"Mem({self._bytes})"
+
+    def __str__(self):
+        return f"Mem @0x{self.addr:016x}\n" + _p_hex(self)
 
     @staticmethod
     def view(a):
@@ -54,7 +61,7 @@ class Mem:
 if __name__ == "__main__":
     x = b"xyz"
     v = Mem.view(x)
-    print(x, v)
+    print(x, repr(v))
     v[:] = b'abc'
-    print(x, v)
+    print(x, repr(v))
 
