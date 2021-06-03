@@ -29,7 +29,7 @@ print(f())  # prints 'hacked'
 
 def g():
     x = "hacked"
-    permajump(8, "current")
+    jump(8, "current")
     x = 42
     return x
 print(f())  # prints 'hacked'
